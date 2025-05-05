@@ -10,12 +10,18 @@
         </Grid.RowDefinitions>
         <!-- Panel sterowania -->
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Wczytaj mapę" Click="WczytajMape_Click" Margin="0,0,10,0"/>
+            <Button Content="Wczytaj mapę" Click="WczytajMape_Click" Margin="0,0,10,0" Height="100" Width="100"/>
             <Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
-            <Image x:Name="obraz" Height="100" Width="100" Source="/gracz.png"/>
+            <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>
+            <Label Name="EtykietaKomunikat" Content="" FontSize="16" Foreground="DarkRed"/>
+            
+
         </StackPanel>
+       
         <!-- Kontener wyświetlający mapę -->
-        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> 
+        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/>
+        <!-- Nowa etykieta komunikatu 
+        <Label Name="EtykietaKomunikatu" FontSize="16" Foreground="Red" Margin="73,30,48,269" Grid.Row="1"/> -->
     </Grid>
 </Window>
 

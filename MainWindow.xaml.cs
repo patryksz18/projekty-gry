@@ -35,6 +35,12 @@ namespace Gra2D
         private Image obrazGracza;
         // Licznik zgromadzonego drewna
         private int iloscDrewna = 0;
+        private int punktyZycia = 3;
+        private Image obrazPrzeciwnika;
+        private int przeciwnikX = 2;
+        private int przeciwnikY = 2;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -128,10 +134,12 @@ namespace Gra2D
 
                 iloscDrewna = 0;
                 EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
+                DodajPrzeciwnika();
             }//koniec try
             catch (Exception ex)
             {
-                MessageBox.Show("Błąd wczytywania mapy: " + ex.Message);
+                EtykietaKomunikat.Content = "Błąd wczytywania mapy: " + ex.Message;
+
             }
         }
 
@@ -175,6 +183,20 @@ namespace Gra2D
                     EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
                 }
             }
+            if (pozycjaGraczaX == przeciwnikX && pozycjaGraczaY == przeciwnikY)
+            {
+                punktyZycia--;
+                EtykietaHP.Content = "HP: " + punktyZycia;
+                EtykietaKomunikat.Content = "Zostałeś trafiony przez przeciwnika!";
+
+                if (punktyZycia <= 0)
+                {
+                    EtykietaKomunikat.Content = "Koniec gry!";
+                    // Możesz też zablokować klawisze lub zrobić reset
+                    this.IsEnabled = false;
+                }
+            }
+
         }
 
         // Obsługa przycisku "Wczytaj mapę"
@@ -189,6 +211,27 @@ namespace Gra2D
                 WczytajMape(oknoDialogowe.FileName);
             }
         }
+        private void DodajPrzeciwnika()
+        {
+            obrazPrzeciwnika = new Image
+            {
+                Width = RozmiarSegmentu,
+                Height = RozmiarSegmentu
+            };
+            BitmapImage bmpPrzeciwnika = new BitmapImage(new Uri("przeciwnik.png", UriKind.Relative));
+            obrazPrzeciwnika.Source = bmpPrzeciwnika;
+
+            SiatkaMapy.Children.Add(obrazPrzeciwnika);
+            Panel.SetZIndex(obrazPrzeciwnika, 1);
+            AktualizujPozycjePrzeciwnika();
+        }
+
+        private void AktualizujPozycjePrzeciwnika()
+        {
+            Grid.SetRow(obrazPrzeciwnika, przeciwnikY);
+            Grid.SetColumn(obrazPrzeciwnika, przeciwnikX);
+        }
+
     }
 }
 

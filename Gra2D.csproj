@@ -12,6 +12,7 @@
     <None Remove="gracz.png" />
     <None Remove="laka.png" />
     <None Remove="las.png" />
+    <None Remove="przeciwnik.png" />
     <None Remove="skala.png" />
   </ItemGroup>
 
@@ -19,6 +20,9 @@
     <Resource Include="gracz.png" />
     <Resource Include="laka.png" />
     <Resource Include="las.png" />
+    <Resource Include="przeciwnik.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="skala.png" />
   </ItemGroup>
 
