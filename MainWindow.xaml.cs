@@ -14,7 +14,8 @@ namespace Gra2D
         public const int LAS = 1;     // las
         public const int LAKA = 2;     // łąka
         public const int SKALA = 3;   // skały
-        public const int ILE_TERENOW = 4;   // ile terenów
+        public const int WROG = 4;   //przeciwnik
+        public const int ILE_TERENOW = 5;   // ile terenów
         // Mapa przechowywana jako tablica dwuwymiarowa int
         private int[,] mapa;
         private int szerokoscMapy;
@@ -37,8 +38,8 @@ namespace Gra2D
         private int iloscDrewna = 0;
         private int punktyZycia = 3;
         private Image obrazPrzeciwnika;
-        private int przeciwnikX = 2;
-        private int przeciwnikY = 2;
+        //private int przeciwnikX = 2;
+        //private int przeciwnikY = 2;
 
 
         public MainWindow()
@@ -61,6 +62,7 @@ namespace Gra2D
             obrazyTerenu[LAS] = new BitmapImage(new Uri("las.png", UriKind.Relative));
             obrazyTerenu[LAKA] = new BitmapImage(new Uri("laka.png", UriKind.Relative));
             obrazyTerenu[SKALA] = new BitmapImage(new Uri("skala.png", UriKind.Relative));
+            obrazyTerenu[WROG] = new BitmapImage(new Uri("przeciwnik.png", UriKind.Relative));
         }
 
         // Wczytuje mapę z pliku tekstowego i dynamicznie tworzy tablicę kontrolek Image
@@ -134,7 +136,7 @@ namespace Gra2D
 
                 iloscDrewna = 0;
                 EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
-                DodajPrzeciwnika();
+                //DodajPrzeciwnika();
             }//koniec try
             catch (Exception ex)
             {
@@ -163,75 +165,108 @@ namespace Gra2D
             //Gracz nie może wyjść poza mapę
             if (nowyX >= 0 && nowyX < szerokoscMapy && nowyY >= 0 && nowyY < wysokoscMapy)
             {
-                // Gracz nie może wejść na pole ze skałami
-                if (mapa[nowyY, nowyX] != SKALA)
-                {
-                    pozycjaGraczaX = nowyX;
-                    pozycjaGraczaY = nowyY;
-                    AktualizujPozycjeGracza();
-                }
-            }
+                int typPola = mapa[nowyY, nowyX];
 
-            // Obsługa wycinania lasu – naciskamy klawisz C
-            if (e.Key == Key.C)
-            {
-                if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)//jeśli gracz stoi na polu lasu
+                if (typPola == WROG)
                 {
-                    mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
-                    tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
-                    iloscDrewna++;
-                    EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
-                }
-            }
-            if (pozycjaGraczaX == przeciwnikX && pozycjaGraczaY == przeciwnikY)
-            {
-                punktyZycia--;
-                EtykietaHP.Content = "HP: " + punktyZycia;
-                EtykietaKomunikat.Content = "Zostałeś trafiony przez przeciwnika!";
+                    // Gracz traci życie po wejściu na pole wroga
+                    punktyZycia--;
+                    EtykietaHP.Content = "Życie: " + punktyZycia;
 
-                if (punktyZycia <= 0)
+                    if (punktyZycia <= 0)
+                    {
+                        EtykietaKomunikat.Content = "Przegrałeś! Koniec gry.";
+                        return; 
+                    }
+                    // Gracz nie może wejść na pole ze skałami
+                    if (mapa[nowyY, nowyX] != SKALA)
+                    {
+                        pozycjaGraczaX = nowyX;
+                        pozycjaGraczaY = nowyY;
+                        AktualizujPozycjeGracza();
+                    }
+                }
+
+                // Obsługa wycinania lasu – naciskamy klawisz C
+                if (e.Key == Key.C)
                 {
-                    EtykietaKomunikat.Content = "Koniec gry!";
-                    // Możesz też zablokować klawisze lub zrobić reset
-                    this.IsEnabled = false;
+                    if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)//jeśli gracz stoi na polu lasu
+                    {
+                        mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
+                        tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
+                        iloscDrewna++;
+                        EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
+                    }
                 }
-            }
+                //if (pozycjaGraczaX == przeciwnikX && pozycjaGraczaY == przeciwnikY)
+                //{
+                //    punktyZycia--;
+                //    EtykietaHP.Content = "HP: " + punktyZycia;
+                //    EtykietaKomunikat.Content = "Zostałeś trafiony przez przeciwnika!";
 
+                //    if (punktyZycia <= 0)
+                //    {
+                //        EtykietaKomunikat.Content = "Koniec gry!";
+                //        // Możesz też zablokować klawisze lub zrobić reset
+                //        this.IsEnabled = false;
+                //    }
+                //}
+
+            }
         }
 
         // Obsługa przycisku "Wczytaj mapę"
-        private void WczytajMape_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog oknoDialogowe = new OpenFileDialog();
-            oknoDialogowe.Filter = "Plik mapy (*.txt)|*.txt";
-            oknoDialogowe.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ustawienie katalogu początkowego
-            bool? czyOtwartoMape = oknoDialogowe.ShowDialog();
-            if (czyOtwartoMape == true)
-            {
-                WczytajMape(oknoDialogowe.FileName);
-            }
-        }
-        private void DodajPrzeciwnika()
-        {
-            obrazPrzeciwnika = new Image
-            {
-                Width = RozmiarSegmentu,
-                Height = RozmiarSegmentu
-            };
-            BitmapImage bmpPrzeciwnika = new BitmapImage(new Uri("przeciwnik.png", UriKind.Relative));
-            obrazPrzeciwnika.Source = bmpPrzeciwnika;
+        //private void WczytajMape_Click(object sender, RoutedEventArgs e)
+        //{
+        //   OpenFileDialog oknoDialogowe = new OpenFileDialog();
+        //   oknoDialogowe.Filter = "Plik mapy (*.txt)|*.txt";
+        //    oknoDialogowe.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ustawienie katalogu początkowego
+        //   bool? czyOtwartoMape = oknoDialogowe.ShowDialog();
+        //    if (czyOtwartoMape == true)
+        //    {
+        //       WczytajMape(oknoDialogowe.FileName);
+        //    }
+        //}
+        //private void DodajPrzeciwnika()
+        //{
+        //    obrazPrzeciwnika = new Image
+        //    {
+        //        Width = RozmiarSegmentu,
+        //        Height = RozmiarSegmentu
+        //    };
+        //    BitmapImage bmpPrzeciwnika = new BitmapImage(new Uri("przeciwnik.png", UriKind.Relative));
+        //    obrazPrzeciwnika.Source = bmpPrzeciwnika;
 
-            SiatkaMapy.Children.Add(obrazPrzeciwnika);
-            Panel.SetZIndex(obrazPrzeciwnika, 1);
-            AktualizujPozycjePrzeciwnika();
-        }
+        //    SiatkaMapy.Children.Add(obrazPrzeciwnika);
+        //    Panel.SetZIndex(obrazPrzeciwnika, 1);
+        //    AktualizujPozycjePrzeciwnika();
+        //}
 
-        private void AktualizujPozycjePrzeciwnika()
+        //private void AktualizujPozycjePrzeciwnika()
+        //{
+        //    Grid.SetRow(obrazPrzeciwnika, przeciwnikY);
+        //    Grid.SetColumn(obrazPrzeciwnika, przeciwnikX);
+        //}
+        private void Mapa1_Click(object sender, RoutedEventArgs e)
         {
-            Grid.SetRow(obrazPrzeciwnika, przeciwnikY);
-            Grid.SetColumn(obrazPrzeciwnika, przeciwnikX);
+            WczytajMape("mapa1.txt");//mapa 5x5
         }
 
+        private void Mapa2_Click(object sender, RoutedEventArgs e)
+        {
+            WczytajMape("mapa2.txt");//mapa 8x8
+        }
+
+        private void Mapa3_Click(object sender, RoutedEventArgs e)
+        {
+            WczytajMape("mapa3.txt");//mapa 10x10
+        }
+
+        private void wybierz_Click(object sender, RoutedEventArgs e)
+        {
+            var menu = (sender as Button).ContextMenu;
+            menu.IsOpen = true;
+        }
     }
 }
 

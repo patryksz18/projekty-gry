@@ -10,16 +10,27 @@
         </Grid.RowDefinitions>
         <!-- Panel sterowania -->
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Wczytaj mapę" Click="WczytajMape_Click" Margin="0,0,10,0" Height="100" Width="100"/>
+            <Button Content="Wybierz mapę" Margin="0,0,10,0" Click="wybierz_Click">
+            <Button.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Mapa mała 5x5" Click="Mapa1_Click"/>
+                    <MenuItem Header="Mapa średnia 8x8" Click="Mapa2_Click"/>
+                    <MenuItem Header="Mapa duża 10x10" Click="Mapa3_Click"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+            </Button>
             <Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
             <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>
             <Label Name="EtykietaKomunikat" Content="" FontSize="16" Foreground="DarkRed"/>
             
 
         </StackPanel>
-       
-        <!-- Kontener wyświetlający mapę -->
-        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/>
+
+        <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
+            <Grid Name="SiatkaMapy"/>
+        </Border>
+        <!-- Kontener wyświetlający mapę 
+        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> -->
         <!-- Nowa etykieta komunikatu 
         <Label Name="EtykietaKomunikatu" FontSize="16" Foreground="Red" Margin="73,30,48,269" Grid.Row="1"/> -->
     </Grid>
