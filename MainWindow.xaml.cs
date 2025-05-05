@@ -70,6 +70,12 @@ namespace Gra2D
         {
             try
             {
+                // Sprawdzamy, czy plik istnieje
+                if (!File.Exists(sciezkaPliku))
+                {
+                    EtykietaKomunikat.Content =("Plik mapy nie istnieje: " + sciezkaPliku);
+                    return;
+                }
                 var linie = File.ReadAllLines(sciezkaPliku);//zwraca tablicę stringów, np. linie[0] to pierwsza linia pliku
                 wysokoscMapy = linie.Length;
                 szerokoscMapy = linie[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;//zwraca liczbę elementów w tablicy
@@ -162,6 +168,7 @@ namespace Gra2D
             else if (e.Key == Key.Down) nowyY++;
             else if (e.Key == Key.Left) nowyX--;
             else if (e.Key == Key.Right) nowyX++;
+
             //Gracz nie może wyjść poza mapę
             if (nowyX >= 0 && nowyX < szerokoscMapy && nowyY >= 0 && nowyY < wysokoscMapy)
             {
