@@ -15,7 +15,7 @@
             <Image x:Name="obraz" Height="100" Width="100" Source="/gracz.png"/>
         </StackPanel>
         <!-- Kontener wyświetlający mapę -->
-        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/>
+        <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> 
     </Grid>
 </Window>
 
