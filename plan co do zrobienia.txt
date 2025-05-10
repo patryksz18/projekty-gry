@@ -1,0 +1,12 @@
+﻿-dodanie przeciwnika (oraz zrobienie funkcji w ktorej zabiera hp)
+-dodanie etykiety do komunikatow
+-dodanie podmenu do przycisku do wyboru mapy
+-stworzenie map
+-dodanie progu zbieranego drewna do wygranej dla kazdej mapie osobny prog
+-wyswietlanie ilosci drewna i hp za pomoca progressbar
+-dodanie poruszania sie za pomoca "wsad"
+-dodanie opcji resetowania gry
+-dodanie metody asynchronicznej ktora umozliwi wyswietlanie komunikatu o wygranej albo przegranej przed resetem gry
+-zmiana personalizacji przyciskow
+-dodanie etykiety ktora wyswietla sterowanie
+-dodanie etykiety ktora wyswietla wymagany prog drewna do wygranej

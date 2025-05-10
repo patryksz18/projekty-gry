@@ -36,15 +36,12 @@
         <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
             <Grid Name="SiatkaMapy"/>
         </Border>
-        <TextBlock HorizontalAlignment="Left" Margin="850,157,0,0" Grid.Row="1" TextWrapping="Wrap" Text="W / ↑ – ruch w górę
-                   
-S / ↓ – ruch w dół
-                   
-A / ← – ruch w lewo
-                   
-D / → – ruch w prawo
-                   
-C – zbieranie drewna" VerticalAlignment="Top" Height="264" Width="122" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Margin="850,157,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Sterowanie:
+                   W / ↑ – ruch w górę
+                   S / ↓ – ruch w dół
+                   A / ← – ruch w lewo
+                   D / → – ruch w prawo
+                   C – zbieranie drewna" VerticalAlignment="Top" Height="264" Width="122" IsEnabled="False"/>
         <Label Name="EtykietaWymaganegoDrewna" Content="" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="33" Width="300" FontSize="16" IsEnabled="False" Foreground="#FFFF710D"/>
         <!-- Kontener wyświetlający mapę 
         <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> -->
