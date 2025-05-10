@@ -170,10 +170,10 @@ namespace Gra2D
             int nowyX = pozycjaGraczaX;
             int nowyY = pozycjaGraczaY;
 
-            if (e.Key == Key.Up) nowyY--;
-            else if (e.Key == Key.Down) nowyY++;
-            else if (e.Key == Key.Left) nowyX--;
-            else if (e.Key == Key.Right) nowyX++;
+            if (e.Key == Key.Up || e.Key == Key.W) nowyY--;
+            else if (e.Key == Key.Down || e.Key == Key.S) nowyY++;
+            else if (e.Key == Key.Left || e.Key == Key.A) nowyX--;
+            else if (e.Key == Key.Right || e.Key == Key.D) nowyX++;
 
             // Ruch gracza w granicach mapy
             if (nowyX >= 0 && nowyX < szerokoscMapy && nowyY >= 0 && nowyY < wysokoscMapy)
@@ -190,6 +190,7 @@ namespace Gra2D
                 if (typPola == WROG)
                 {
                     punktyZycia--;
+                    PasekHP.Value = punktyZycia;
                     EtykietaHP.Content = "Życie: " + punktyZycia;
                     EtykietaKomunikat.Content = "Zaatakował cię wróg!";
 
