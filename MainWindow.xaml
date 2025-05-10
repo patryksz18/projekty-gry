@@ -1,10 +1,10 @@
 ﻿<Window x:Class="Gra2D.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Gra WPF" Height="600" Width="1000"
+        Title="WoodHunt" Height="600" Width="1000"
         KeyDown="OknoGlowne_KeyDown"
         Focusable="True">
-    <Grid>
+    <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -41,8 +41,18 @@
                    S / ↓ – ruch w dół
                    A / ← – ruch w lewo
                    D / → – ruch w prawo
-                   C – zbieranie drewna" VerticalAlignment="Top" Height="264" Width="122" IsEnabled="False"/>
-        <Label Name="EtykietaWymaganegoDrewna" Content="" HorizontalAlignment="Left" Margin="302,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="33" Width="300" FontSize="16" IsEnabled="False" Foreground="#FFFF710D"/>
+                   C – zbieranie drewna" VerticalAlignment="Top" Height="264" Width="122" IsEnabled="False" Foreground="White"/>
+        <Label Name="EtykietaWymaganegoDrewna" Content="" HorizontalAlignment="Center" Margin="0,62,0,0" Grid.Row="1" VerticalAlignment="Top" Height="33" Width="300" FontSize="16" IsEnabled="False" Foreground="#FFFF710D"/>
+        <Label x:Name="nazwa_gry" Content="WoodHunt" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="45" Width="160" FontWeight="Bold" FontStyle="Italic" FontSize="28" IsEnabled="False">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF351B02" Offset="0.391"/>
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="#FF023A05" Offset="0.923"/>
+                    <GradientStop Color="#FF023904" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
         <!-- Kontener wyświetlający mapę 
         <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> -->
         <!-- Nowa etykieta komunikatu 
