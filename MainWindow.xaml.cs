@@ -192,7 +192,7 @@ namespace Gra2D
                     punktyZycia--;
                     PasekHP.Value = punktyZycia;
                     EtykietaHP.Content = "Życie: " + punktyZycia;
-                    EtykietaKomunikat.Content = "Zaatakował cię wróg!";
+                    await DotkientyPrzezPrzeciwnika();
 
                     if (punktyZycia <= 0)
                     {
@@ -325,6 +325,17 @@ namespace Gra2D
 
 
             await Task.Delay(3000);
+
+
+            EtykietaKomunikat.Content = "";
+        }
+        private async Task DotkientyPrzezPrzeciwnika()
+        {
+
+            EtykietaKomunikat.Content = "Zaatakował cię wróg!";
+
+
+            await Task.Delay(1000);
 
 
             EtykietaKomunikat.Content = "";
