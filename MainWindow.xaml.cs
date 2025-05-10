@@ -165,7 +165,7 @@ namespace Gra2D
         }
 
         // Obsługa naciśnięć klawiszy – ruch gracza oraz wycinanie lasu
-        private void OknoGlowne_KeyDown(object sender, KeyEventArgs e)
+        private async void OknoGlowne_KeyDown(object sender, KeyEventArgs e)
         {
             int nowyX = pozycjaGraczaX;
             int nowyY = pozycjaGraczaY;
@@ -196,8 +196,8 @@ namespace Gra2D
 
                     if (punktyZycia <= 0)
                     {
-                        EtykietaKomunikat.Content = "Przegrałeś! Koniec gry.";
-                        this.IsEnabled = false;
+                       await WyswietlKomunikatPrzegranej();
+                        ResetujGre();
                     }
                 }
             }
@@ -217,8 +217,8 @@ namespace Gra2D
 
                         if (iloscDrewna >= celDrewna)
                         {
-                            EtykietaKomunikat.Content = "Wygrałeś! Zebrałeś odpowiedią ilość drewna!";
-                            this.IsEnabled = false;
+                            await WyswietlKomunikatWygranej();
+                            ResetujGre();
                         }
                     }
                 }
@@ -281,7 +281,56 @@ namespace Gra2D
             var menu = (sender as Button).ContextMenu;
             menu.IsOpen = true;
         }
+        private void RestartujGre_Click(object sender, RoutedEventArgs e)
+        {
+            ResetujGre(); // Uruchamia funkcję resetującą grę
+        }
+        private void ResetujGre()
+        {
+            
+            pozycjaGraczaX = 0;
+            pozycjaGraczaY = 0;
+            punktyZycia = 3;
+            iloscDrewna = 0;
+
+            
+            EtykietaHP.Content = "HP: " + punktyZycia;
+            EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
+            EtykietaKomunikat.Content = "";
+
+            
+            SiatkaMapy.Children.Clear();
+
+            
+            EtykietaKomunikat.Content = "Nowa gra rozpoczęta! Wybierz mapę. Powodzenia!";
+        }
+        private async Task WyswietlKomunikatWygranej()
+        {
+            
+            EtykietaKomunikat.Content = "Wygrałeś! Gratulacje!";
+
+            
+            await Task.Delay(3000); 
+
+           
+            EtykietaKomunikat.Content = ""; 
+        }
+        private async Task WyswietlKomunikatPrzegranej()
+        {
+
+            EtykietaKomunikat.Content = "Przegrałeś!";
+
+
+            await Task.Delay(3000);
+
+
+            EtykietaKomunikat.Content = "";
+        }
+
+
+
     }
+
 }
 
 
