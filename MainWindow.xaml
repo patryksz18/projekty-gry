@@ -10,17 +10,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!-- Panel sterowania -->
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Wybierz mapę" Margin="0,0,10,0" Click="wybierz_Click">
-            <Button.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Mapa mała 5x5" Click="Mapa1_Click"/>
-                    <MenuItem Header="Mapa średnia 8x8" Click="Mapa2_Click"/>
-                    <MenuItem Header="Mapa duża 10x10" Click="Mapa3_Click"/>
-                </ContextMenu>
-            </Button.ContextMenu>
+        <StackPanel Orientation="Horizontal" Margin="10" Background="White">
+            <Button Content="Wybierz mapę" Margin="0,0,10,0" Click="wybierz_Click" BorderBrush="#FF006F00" Foreground="#FF007100">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Mapa mała 5x5" Click="Mapa1_Click"/>
+                        <MenuItem Header="Mapa średnia 8x8" Click="Mapa2_Click"/>
+                        <MenuItem Header="Mapa duża 10x10" Click="Mapa3_Click"/>
+                    </ContextMenu>
+                </Button.ContextMenu>
             </Button>
-            <Button Content="Restartuj Grę" Margin="0,0,10,0" Click="RestartujGre_Click" />
+            <Button Content="Restartuj Grę" Margin="0,0,10,0" Click="RestartujGre_Click" BorderBrush="Red" Foreground="Red" />
             <!--<Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
             <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>-->
             <Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
@@ -29,13 +29,22 @@
             <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>
             <ProgressBar Name="PasekHP" Width="60" Height="16" Maximum="3" Margin="5,0,0,0"/>
             <Label Name="EtykietaKomunikat" Content="" FontSize="16" Foreground="DarkRed"/>
-            
+
 
         </StackPanel>
 
         <Border Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Black">
             <Grid Name="SiatkaMapy"/>
         </Border>
+        <TextBlock HorizontalAlignment="Left" Margin="850,157,0,0" Grid.Row="1" TextWrapping="Wrap" Text="W / ↑ – ruch w górę
+                   
+S / ↓ – ruch w dół
+                   
+A / ← – ruch w lewo
+                   
+D / → – ruch w prawo
+                   
+C – zbieranie drewna" VerticalAlignment="Top" Height="264" Width="122" IsEnabled="False"/>
         <!-- Kontener wyświetlający mapę 
         <Grid Name="SiatkaMapy" Grid.Row="1" Background="LightGray"/> -->
         <!-- Nowa etykieta komunikatu 
