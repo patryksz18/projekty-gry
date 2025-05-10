@@ -261,18 +261,21 @@ namespace Gra2D
         private void Mapa1_Click(object sender, RoutedEventArgs e)
         {
             celDrewna = 10;
+            EtykietaWymaganegoDrewna.Content = "Wymagan liczba drewna by wygrać: " + celDrewna;
             WczytajMape("mapa1.txt");//mapa 5x5
         }
 
         private void Mapa2_Click(object sender, RoutedEventArgs e)
         {
             celDrewna = 15;
+            EtykietaWymaganegoDrewna.Content = "Wymagan liczba drewna by wygrać: " + celDrewna;
             WczytajMape("mapa2.txt");//mapa 8x8
         }
 
         private void Mapa3_Click(object sender, RoutedEventArgs e)
         {
             celDrewna = 20;
+            EtykietaWymaganegoDrewna.Content = "Wymagan liczba drewna by wygrać: " + celDrewna;
             WczytajMape("mapa3.txt");//mapa 10x10
         }
 
