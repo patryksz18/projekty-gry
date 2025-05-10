@@ -302,7 +302,7 @@ namespace Gra2D
             SiatkaMapy.Children.Clear();
 
             
-            EtykietaKomunikat.Content = "Nowa gra rozpoczęta! Wybierz mapę. Powodzenia!";
+            EtykietaKomunikat.Content = "Nowa gra rozpoczęta! Wybierz mapę! Powodzenia!";
         }
         private async Task WyswietlKomunikatWygranej()
         {
