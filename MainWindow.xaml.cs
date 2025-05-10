@@ -40,6 +40,7 @@ namespace Gra2D
         private Image obrazPrzeciwnika;
         //private int przeciwnikX = 2;
         //private int przeciwnikY = 2;
+        private int celDrewna = 10;
 
 
         public MainWindow()
@@ -149,6 +150,11 @@ namespace Gra2D
                 EtykietaKomunikat.Content = "Błąd wczytywania mapy: " + ex.Message;
 
             }
+            PasekDrewna.Value = 0;
+            PasekDrewna.Maximum = celDrewna;
+
+            PasekHP.Value = punktyZycia;
+
         }
 
         // Aktualizuje pozycję obrazka gracza w siatce
@@ -198,13 +204,24 @@ namespace Gra2D
             // Obsługa wycinania lasu
             if (e.Key == Key.C)
             {
-                if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)
+                if (e.Key == Key.C)
                 {
-                    mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
-                    tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
-                    iloscDrewna++;
-                    EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
+                    if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)
+                    {
+                        mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
+                        tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
+                        iloscDrewna++;
+                        EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
+                        PasekDrewna.Value = iloscDrewna;
+
+                        if (iloscDrewna >= celDrewna)
+                        {
+                            EtykietaKomunikat.Content = "Wygrałeś! Zebrałeś odpowiedią ilość drewna!";
+                            this.IsEnabled = false;
+                        }
+                    }
                 }
+
             }
         }
 
@@ -242,16 +259,19 @@ namespace Gra2D
         //}
         private void Mapa1_Click(object sender, RoutedEventArgs e)
         {
+            celDrewna = 10;
             WczytajMape("mapa1.txt");//mapa 5x5
         }
 
         private void Mapa2_Click(object sender, RoutedEventArgs e)
         {
+            celDrewna = 15;
             WczytajMape("mapa2.txt");//mapa 8x8
         }
 
         private void Mapa3_Click(object sender, RoutedEventArgs e)
         {
+            celDrewna = 20;
             WczytajMape("mapa3.txt");//mapa 10x10
         }
 

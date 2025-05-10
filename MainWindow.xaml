@@ -20,8 +20,13 @@
                 </ContextMenu>
             </Button.ContextMenu>
             </Button>
+            <!--<Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
+            <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>-->
             <Label Name="EtykietaDrewna" Content="Drewno: 0" FontSize="16"/>
+            <ProgressBar Name="PasekDrewna" Width="100" Height="16" Margin="5,0,0,0"/>
+
             <Label Name="EtykietaHP" Content="HP: 3" FontSize="16" Margin="10,0,0,0"/>
+            <ProgressBar Name="PasekHP" Width="60" Height="16" Maximum="3" Margin="5,0,0,0"/>
             <Label Name="EtykietaKomunikat" Content="" FontSize="16" Foreground="DarkRed"/>
             
 
