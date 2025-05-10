@@ -163,62 +163,48 @@ namespace Gra2D
         {
             int nowyX = pozycjaGraczaX;
             int nowyY = pozycjaGraczaY;
-            //zmiana pozycji gracza
+
             if (e.Key == Key.Up) nowyY--;
             else if (e.Key == Key.Down) nowyY++;
             else if (e.Key == Key.Left) nowyX--;
             else if (e.Key == Key.Right) nowyX++;
 
-            //Gracz nie może wyjść poza mapę
+            // Ruch gracza w granicach mapy
             if (nowyX >= 0 && nowyX < szerokoscMapy && nowyY >= 0 && nowyY < wysokoscMapy)
             {
                 int typPola = mapa[nowyY, nowyX];
 
+                if (typPola != SKALA)
+                {
+                    pozycjaGraczaX = nowyX;
+                    pozycjaGraczaY = nowyY;
+                    AktualizujPozycjeGracza();
+                }
+
                 if (typPola == WROG)
                 {
-                    // Gracz traci życie po wejściu na pole wroga
                     punktyZycia--;
                     EtykietaHP.Content = "Życie: " + punktyZycia;
+                    EtykietaKomunikat.Content = "Zaatakował cię wróg!";
 
                     if (punktyZycia <= 0)
                     {
                         EtykietaKomunikat.Content = "Przegrałeś! Koniec gry.";
-                        return; 
-                    }
-                    // Gracz nie może wejść na pole ze skałami
-                    if (mapa[nowyY, nowyX] != SKALA)
-                    {
-                        pozycjaGraczaX = nowyX;
-                        pozycjaGraczaY = nowyY;
-                        AktualizujPozycjeGracza();
+                        this.IsEnabled = false;
                     }
                 }
+            }
 
-                // Obsługa wycinania lasu – naciskamy klawisz C
-                if (e.Key == Key.C)
+            // Obsługa wycinania lasu
+            if (e.Key == Key.C)
+            {
+                if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)
                 {
-                    if (mapa[pozycjaGraczaY, pozycjaGraczaX] == LAS)//jeśli gracz stoi na polu lasu
-                    {
-                        mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
-                        tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
-                        iloscDrewna++;
-                        EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
-                    }
+                    mapa[pozycjaGraczaY, pozycjaGraczaX] = LAKA;
+                    tablicaTerenu[pozycjaGraczaY, pozycjaGraczaX].Source = obrazyTerenu[LAKA];
+                    iloscDrewna++;
+                    EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
                 }
-                //if (pozycjaGraczaX == przeciwnikX && pozycjaGraczaY == przeciwnikY)
-                //{
-                //    punktyZycia--;
-                //    EtykietaHP.Content = "HP: " + punktyZycia;
-                //    EtykietaKomunikat.Content = "Zostałeś trafiony przez przeciwnika!";
-
-                //    if (punktyZycia <= 0)
-                //    {
-                //        EtykietaKomunikat.Content = "Koniec gry!";
-                //        // Możesz też zablokować klawisze lub zrobić reset
-                //        this.IsEnabled = false;
-                //    }
-                //}
-
             }
         }
 
