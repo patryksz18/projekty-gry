@@ -143,7 +143,7 @@ namespace Gra2D
 
                 iloscDrewna = 0;
                 EtykietaDrewna.Content = "Drewno: " + iloscDrewna;
-                //DodajPrzeciwnika();
+               
             }//koniec try
             catch (Exception ex)
             {
@@ -226,38 +226,7 @@ namespace Gra2D
             }
         }
 
-        // Obsługa przycisku "Wczytaj mapę"
-        //private void WczytajMape_Click(object sender, RoutedEventArgs e)
-        //{
-        //   OpenFileDialog oknoDialogowe = new OpenFileDialog();
-        //   oknoDialogowe.Filter = "Plik mapy (*.txt)|*.txt";
-        //    oknoDialogowe.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory; // Ustawienie katalogu początkowego
-        //   bool? czyOtwartoMape = oknoDialogowe.ShowDialog();
-        //    if (czyOtwartoMape == true)
-        //    {
-        //       WczytajMape(oknoDialogowe.FileName);
-        //    }
-        //}
-        //private void DodajPrzeciwnika()
-        //{
-        //    obrazPrzeciwnika = new Image
-        //    {
-        //        Width = RozmiarSegmentu,
-        //        Height = RozmiarSegmentu
-        //    };
-        //    BitmapImage bmpPrzeciwnika = new BitmapImage(new Uri("przeciwnik.png", UriKind.Relative));
-        //    obrazPrzeciwnika.Source = bmpPrzeciwnika;
-
-        //    SiatkaMapy.Children.Add(obrazPrzeciwnika);
-        //    Panel.SetZIndex(obrazPrzeciwnika, 1);
-        //    AktualizujPozycjePrzeciwnika();
-        //}
-
-        //private void AktualizujPozycjePrzeciwnika()
-        //{
-        //    Grid.SetRow(obrazPrzeciwnika, przeciwnikY);
-        //    Grid.SetColumn(obrazPrzeciwnika, przeciwnikX);
-        //}
+       
         private void Mapa1_Click(object sender, RoutedEventArgs e)
         {
             celDrewna = 10;
